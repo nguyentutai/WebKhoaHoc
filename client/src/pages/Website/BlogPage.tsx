@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { IBlog } from "../interfaces/IBlog";
 import { Link } from "react-router-dom";
+import { IBlog } from "../../interfaces/IBlog";
 
 const BlogPage = () => {
   const [blog, setBlog] = useState<IBlog[]>([]);

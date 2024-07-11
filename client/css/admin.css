@@ -1,0 +1,47 @@
+.container-admin {
+  display: flex;
+}
+
+.aside-admin {
+  height: 92.6vh;
+  border-right: 0.5px solid rgb(217, 217, 217);
+  width: 300px;
+  max-width: 100%;
+}
+.aside-admin nav ul li {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 15px 10px;
+}
+
+.aside-admin nav ul li a {
+  text-decoration: none;
+  color: rgb(85, 85, 85);
+  font-size: 22px;
+  display: block;
+  font-weight: 500;
+}
+.aside-admin nav ul {
+  padding: 0 !important;
+}
+.aside-admin nav ul li i {
+  font-size: 25px;
+  color: rgb(103, 103, 103);
+}
+
+.aside-admin nav ul li:hover {
+  background-color: rgba(126, 126, 126, 0.259);
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.aside-admin nav ul li:hover a {
+  color: rgb(86, 86, 86);
+  font-weight: 700;
+}
+.aside-admin nav ul li:hover i {
+  color: rgb(121, 121, 121);
+}

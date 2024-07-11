@@ -188,8 +188,8 @@
 
 .write-blog {
   line-height: 35px;
-  border-bottom: 0.3px solid rgba(189, 188, 188, 0.33);
   position: relative;
+  margin-bottom: 100px;
 }
 .popup-watch-blog {
   position: absolute;

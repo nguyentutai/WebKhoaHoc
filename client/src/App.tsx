@@ -1,34 +1,35 @@
-import HeaderPage from "./pages/HeaderPage";
-import AsidePage from "./pages/AsidePage";
-import HomePage from "./pages/HomePage/HomePage";
-import Footer from "./pages/FooterPage";
-import RouterPage from "./pages/RouterPage";
+import RouterPage from "./pages/Website/RouterPage";
 import { Route, Routes } from "react-router-dom";
 import "../css/main.css";
-import "../css/auth.css"
-import RegisterPage from "./pages/Authentications/RegisterPage";
-import LoginPage from "./pages/Authentications/LoginPage";
+import "../css/auth.css";
+import "../css/admin.css";
 import { LoginProvider } from "./contexts/LoginProvider";
 import BlogWrite from "./components/Pages/BlogWrite";
-import BlogPage from "./pages/BlogPage";
+import LayoutWebsite from "./layouts/LayoutWebsite";
+import LayoutAdmin from "./layouts/LayoutAdmin";
+import RegisterPage from "./pages/Website/Authentications/RegisterPage";
+import BlogPage from "./pages/Website/BlogPage";
+import LoginPage from "./pages/Website/LoginPage";
+import HomePage from "./pages/Website/HomePage/HomePage";
+import Dashboard from "./pages/Admin/Dashboards/Dashboard";
 function App() {
   return (
     <LoginProvider>
-      <HeaderPage />
-      <div className="container container1">
-        <AsidePage />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
+      <Routes>
+        <Route path="/" element={<LayoutWebsite />}>
+          <Route index element={<HomePage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/router" element={<RouterPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/write-blog' element={<BlogWrite />} />
-        </Routes>
-      </div>
-      <Footer />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/write-blog" element={<BlogWrite />} />
+        </Route>
+        <Route path="/admin" element={<LayoutAdmin />}>
+          <Route index element={<Dashboard />} />
+        </Route>
+      </Routes>
     </LoginProvider>
-  )
+  );
 }
 
-export default App
+export default App;

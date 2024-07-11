@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const blogSchema = new mongoose.Schema(
+const categorySchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    content: {
+    slug: {
       type: String,
       required: true,
     },
@@ -14,10 +14,11 @@ const blogSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    image_url: {
-      type: String,
-      required: true,
+    isHidden: {
+      type: Boolean,
+      default: false,
     },
+    coursesId: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
   },
   {
     timestamps: true,
@@ -25,4 +26,4 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("blogs", blogSchema);
+export default mongoose.model("categorys", categorySchema);

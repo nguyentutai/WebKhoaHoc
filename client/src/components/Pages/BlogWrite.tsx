@@ -71,39 +71,7 @@ const BlogWrite = () => {
     // Xem trước bài viết
     if (e == "watch") {
       setWatchBlog((prevLogin) => !prevLogin);
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(content, "text/html");
-      const images = doc.querySelectorAll("img");
-      const imageUploadPromises = Array.from(images).map(async (img) => {
-        const src = img.getAttribute("src");
-        if (src) {
-          const response = await fetch(src);
-          const blob = await response.blob();
-          const formData = new FormData();
-          formData.append("file", blob);
-          formData.append("upload_preset", "blog_cousse");
-          const uploadResponse = await fetch(
-            "https://api.cloudinary.com/v1_1/drz5kdrm5/image/upload",
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
-          const uploadData = await uploadResponse.json();
-          return { originalSrc: src, newSrc: uploadData.secure_url };
-        }
-        return null;
-      });
-
-      const uploadedImages = await Promise.all(imageUploadPromises);
-      let updatedContent = content;
-
-      uploadedImages.forEach((img) => {
-        if (img) {
-          updatedContent = updatedContent.replace(img.originalSrc, img.newSrc);
-        }
-      });
-      setwatchContent(updatedContent);
+      setwatchContent(content);
     } else if (e == "save") {
       if (!title) {
         toast.error("Please provide a title");
@@ -208,7 +176,7 @@ const BlogWrite = () => {
             />
           </div>
           <div className="file-upload">
-            <label htmlFor="blog-file">Chọn tệp</label>
+            <label htmlFor="blog-file">Ảnh tiêu đề</label>
             <input
               type="file"
               id="blog-file"
