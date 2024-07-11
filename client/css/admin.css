@@ -1,28 +1,35 @@
 .container-admin {
   display: flex;
 }
-
+.actical-admin {
+  margin-left: 300px;
+  width: 84%;
+}
 .aside-admin {
   height: 92.6vh;
   border-right: 0.5px solid rgb(217, 217, 217);
   width: 300px;
+  position: fixed;
   max-width: 100%;
 }
 .aside-admin nav ul li {
   list-style: none;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 10px 20px;
   margin: 15px 10px;
 }
-
 .aside-admin nav ul li a {
   text-decoration: none;
   color: rgb(85, 85, 85);
-  font-size: 22px;
   display: block;
+  font-size: 22px;
   font-weight: 500;
+  padding: 10px 20px;
+}
+.aside-admin nav ul li a section {
+  display: flex;
+  align-items: center;
+}
+.aside-admin nav ul li a p {
+  margin: 3px 20px;
 }
 .aside-admin nav ul {
   padding: 0 !important;
@@ -44,4 +51,416 @@
 }
 .aside-admin nav ul li:hover i {
   color: rgb(121, 121, 121);
+}
+
+/* Category */
+.list-category {
+  width: 100%;
+  padding: 10px 30px;
+}
+.list-category h2 {
+  background-color: rgb(255, 123, 0);
+  width: fit-content;
+  padding: 7px 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: 22px;
+}
+.list-category table {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+.list-category .list-cate-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-category .list-cate-title a {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(37, 81, 255, 0.799);
+  padding: 7px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-category .list-cate-title a:hover {
+  background-color: rgb(37, 81, 255);
+  transition: 0.4s ease-in-out;
+}
+.list-category table thead {
+  background-color: rgba(227, 227, 227, 0.821);
+}
+.list-category table thead tr th {
+  padding: 7px 20px;
+  font-size: 19px;
+  font-weight: 700;
+}
+.list-category table thead tr th:last-child {
+  padding-left: 85px;
+}
+.list-category table tbody tr td {
+  padding: 10px 20px;
+}
+
+.list-category table tbody tr a {
+  background-color: rgba(55, 68, 247, 0.801);
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-category table tbody tr button {
+  background-color: rgba(255, 1, 1, 0.685);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-category table tbody tr a:hover {
+  background-color: rgb(55, 68, 247);
+  transition: 0.4s ease-in-out;
+}
+.list-category table tbody tr button:hover {
+  background-color: rgb(255, 1, 1);
+  transition: 0.4s ease-in-out;
+}
+.list-category table tbody tr td:nth-child(3) .h {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-category table tbody tr td:nth-child(3) .a {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: rgb(255, 0, 0);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.name-category {
+  width: 50%;
+}
+.name-category input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 20px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border: none;
+  border-radius: 5px;
+}
+.option-category {
+  margin-top: 10px;
+  width: 100%;
+}
+.option-category select {
+  width: 25%;
+  margin-top: 10px;
+  padding: 10px 20px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Courses */
+.list-course {
+  width: 100%;
+  padding: 10px 30px;
+}
+.list-course h2 {
+  background-color: rgb(255, 123, 0);
+  width: fit-content;
+  padding: 7px 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: 22px;
+}
+.list-course table {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+.list-course .list-cour-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-course .list-cour-title a {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(37, 81, 255, 0.799);
+  padding: 7px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-course .list-cour-title a:hover {
+  background-color: rgb(37, 81, 255);
+  transition: 0.4s ease-in-out;
+}
+.list-course table thead {
+  background-color: rgba(227, 227, 227, 0.821);
+}
+.list-course table thead tr th:last-child {
+  padding-left: 85px;
+}
+.list-course table thead tr th {
+  padding: 7px 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.list-course table tbody tr td {
+  padding: 10px 20px;
+}
+
+.list-course table tbody tr a {
+  background-color: rgba(55, 68, 247, 0.801);
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-course table tbody tr button {
+  background-color: rgba(255, 1, 1, 0.685);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-course table tbody tr a:hover {
+  background-color: rgb(55, 68, 247);
+  transition: 0.4s ease-in-out;
+}
+.list-course table tbody tr button:hover {
+  background-color: rgb(255, 1, 1);
+  transition: 0.4s ease-in-out;
+}
+.list-course img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+.arrange {
+  border: none;
+  background-color: rgba(151, 151, 151, 0.823);
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.search {
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  background-color: rgb(213, 213, 213);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.list-course table tbody tr td:nth-child(4) {
+  font-weight: 700;
+  color: red;
+}
+.list-course table tbody tr td:nth-child(5) {
+  font-weight: 700;
+  color: red;
+}
+.list-course table tbody tr td:nth-child(7) .h {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-course table tbody tr td:nth-child(7) .a {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: rgb(255, 0, 0);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.form-course {
+  margin: 20px 30px;
+}
+
+.form-course form {
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 20px 30px;
+}
+
+.form-course label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+}
+.title-select-course,
+.course-form-price,
+.form-course-des,
+.status-image {
+  display: flex;
+  width: 100%;
+  gap: 50px;
+}
+.status-image {
+  margin-top: 20px;
+}
+.course-form-price {
+  margin-top: 20px;
+}
+.title-select-course .title-course,
+.course-cornerprice,
+.course-discount,
+.status-form {
+  width: 48%;
+}
+.title-select-course input,
+.course-cornerprice input,
+.course-discount input,
+.image-course-link {
+  width: 100%;
+  padding: 7px 10px;
+  margin-top: 5px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border-radius: 5px;
+  border: none;
+}
+.select-course {
+  width: 48%;
+}
+
+.select-course select,
+.status-form select {
+  width: 100%;
+  padding: 9px;
+  margin-top: 5px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+.form-course-image-option select {
+  width: 100%;
+  padding: 9px;
+  margin-top: -3px;
+  outline: none;
+  border: 0.5px solid rgba(145, 145, 145, 0.777);
+  border-radius: 5px;
+}
+.select-course option,
+.status-form option {
+  width: 100%;
+  padding: 9px;
+  margin-top: 5px;
+  outline: none;
+  border: 0.5px solid rgba(145, 145, 145, 0.777);
+  border-radius: 5px;
+}
+.course-des {
+  width: 100%;
+  margin-top: 20px;
+}
+.course-des textarea {
+  width: 99.5%;
+  min-height: 150px;
+  max-height: 300px;
+  margin-top: 5px;
+  padding: 15px 20px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border: none;
+  border-radius: 5px;
+}
+.form-course-image {
+  display: flex;
+  width: 48%;
+  gap: 30px;
+  max-width: 100%;
+}
+.form-course-image-option {
+  width: 50%;
+}
+#thumbnail-file {
+  display: none;
+}
+.upload-image-course {
+  background-color: rgba(174, 174, 174, 0.784);
+  cursor: pointer;
+  width: 100px;
+  padding: 5px 5px;
+  margin-bottom: 0;
+  margin-top: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+.upload-image-course p {
+  font-size: 13px;
+  margin-top: 5px;
+}
+.upload-image-course i {
+  font-size: 35px;
+  padding: 5px;
+  display: block;
+}
+
+.form-course-image-up {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+}
+.form-course button {
+  border: none;
+  outline: none;
+  padding: 9px 30px;
+  margin-top: 20px;
+  background-color: rgba(255, 101, 12, 0.845);
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.form-course button:hover {
+  background-color: rgb(255, 101, 12);
+  transition: 0.4s ease-in-out;
+}
+.form-errors {
+  color: red;
+  margin-top: 3px;
+  font-size: 15px;
+}
+.form-course h2 {
+  margin: 10px 20px;
+  font-family: sans-serif;
+  font-weight: 800;
+}
+.form-course img {
+  border-radius: 10px;
 }

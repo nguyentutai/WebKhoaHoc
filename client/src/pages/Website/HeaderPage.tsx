@@ -37,7 +37,7 @@ const HeaderPage = () => {
       <div className="header-logo-title">
         <div className="header-logo">
           <img
-            src="../../public/image/logo.png"
+            src="https://res.cloudinary.com/drz5kdrm5/image/upload/v1720687512/logo_igefux.png"
             alt="F8 học lập trình để đi làm"
           />
         </div>

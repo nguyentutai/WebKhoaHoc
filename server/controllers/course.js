@@ -92,15 +92,16 @@ class Course {
   // Xóa cứng Course trong MongoDB
   async removeCourseById(req, res) {
     try {
-      const data = await courseSchema.findByIdAndRemove(req.params.id);
+      const data = await courseSchema.findByIdAndDelete(req.params.id);
       if (data) {
         res.send({
           status: true,
           message: "Remove Course Successfully",
+          data: data,
         });
       }
     } catch (error) {
-      console.log("deleteProducrs False" + error);
+      console.log("deleteCourse False" + error);
     }
   }
 

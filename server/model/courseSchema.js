@@ -24,7 +24,6 @@ const courseSchema = new mongoose.Schema(
     },
     link: {
       type: String,
-      required: true,
     },
     categoryId: {
       type: mongoose.Types.ObjectId,

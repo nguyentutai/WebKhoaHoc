@@ -8,7 +8,9 @@ export default function LayoutAdmin() {
       <HeaderAdmin />
       <div className="container-admin">
         <AsideAdmin />
-        <Outlet />
+        <div className="actical-admin">
+          <Outlet />
+        </div>
       </div>
     </>
   );

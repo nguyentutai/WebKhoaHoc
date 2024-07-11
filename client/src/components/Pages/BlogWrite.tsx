@@ -3,8 +3,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IBlog } from "../../interfaces/IBlog";
 import { useNavigate } from "react-router-dom";
-import UploadCoudiary from "../Cloudiary";
+import UploadCoudiary from "../../utils/Cloudiary";
 import { toast } from "react-toastify";
+import toSlug from "../../utils/Slug";
 const BlogWrite = () => {
   const [content, setContent] = useState("");
   const [watctchContent, setwatchContent] = useState("");
@@ -111,16 +112,17 @@ const BlogWrite = () => {
           updatedContent = updatedContent.replace(img.originalSrc, img.newSrc);
         }
       });
-
+      console.log(updatedContent);
       setBlog({
         title: title,
+        slug: toSlug(title),
+        like: 0,
         content: updatedContent,
         status: true,
         image_url: imageUp,
       });
     }
   };
-
   if (blog) {
     useEffect(() => {
       fetch("http://localhost:3000/api/blog", {
@@ -133,7 +135,6 @@ const BlogWrite = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data) {
-            console.log(data);
             alert("Thêm bài viết thành công");
             nav("/blog");
           }

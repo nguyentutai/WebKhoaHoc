@@ -7,10 +7,12 @@ const blogController = new Blog();
 blogRouter.get("/blog", blogController.getBlog);
 // Lấy dữ liệu theo id
 blogRouter.get("/blog/:id", blogController.getBlogId);
+blogRouter.get("/blogslug/:slug", blogController.getBlogSlug);
 // Thêm dữ liệu vào MongoDB
 blogRouter.post("/blog", blogController.postBlog);
 // Cập nhật dữ liệu course vào MongoDB
 blogRouter.put("/blog/:id", blogController.updateBlog);
+blogRouter.put("/blogLike/:id", blogController.updateLikeBlog);
 // Xóa cứng course trong MongoDB
 blogRouter.delete("/blog/:id", blogController.removeBlogById);
 // Xóa mềm course trong MongoDB

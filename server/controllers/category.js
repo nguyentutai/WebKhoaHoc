@@ -52,18 +52,18 @@ class Category {
   // Cập nhật dữ liệu Category vào MongoDB
   async updateCategory(req, res) {
     try {
-      const dataPro = await categorySchema.findByIdAndUpdate(
+      const data = await categorySchema.findByIdAndUpdate(
         `${req.params.id}`,
         req.body,
         {
           new: true,
         }
       );
-      if (dataPro) {
+      if (data) {
         res.send({
           status: true,
           message: "Update Category Successfully",
-          dataPro,
+          data: data,
         });
       } else {
         res.send({ status: false, message: "Update Category False" });
@@ -107,7 +107,7 @@ class Category {
   // Xóa mềm Category trong MongoDB
   async softRemoveCategoryById(req, res) {
     try {
-      const dataPro = await categorySchema.findByIdAndUpdate(
+      const data = await categorySchema.findByIdAndUpdate(
         `${req.params.id}`,
         {
           status: true,
@@ -117,7 +117,7 @@ class Category {
           new: true,
         }
       );
-      if (dataPro) {
+      if (data) {
         res.send({
           status: true,
           message: "Soft Remove Category Successfully",

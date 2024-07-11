@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IBlog } from "../../interfaces/IBlog";
+import { IBlog } from "../../../interfaces/IBlog";
 
 const BlogPage = () => {
   const [blog, setBlog] = useState<IBlog[]>([]);
@@ -27,7 +27,7 @@ const BlogPage = () => {
               <div key={index}>
                 <div className="doc-blog">
                   <div>
-                    <Link to={""}>{item.title}</Link>
+                    <Link to={item.slug}>{item.title}</Link>
                   </div>
                   <img className="blog-image" src={item.image_url} alt="" />
                 </div>

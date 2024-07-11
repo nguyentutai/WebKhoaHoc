@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import IRegister from "../../interfaces/Auth/IRegister";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import IRegister from "../../../interfaces/Auth/IRegister";
 
 const RegisterPage = () => {
   const {

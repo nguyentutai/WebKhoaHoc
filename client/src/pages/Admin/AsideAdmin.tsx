@@ -10,24 +10,44 @@ export default function AsideAdmin() {
         <nav>
           <ul>
             <li>
-              <i className="fa-solid fa-chart-line"></i>
-              <Link to={""}>Dashboards</Link>
+              <Link to={"/admin"}>
+                <section>
+                  <i className="fa-solid fa-chart-line"></i>
+                  <p>Dashboards</p>
+                </section>
+              </Link>
             </li>
             <li>
-              <i className="fa-solid fa-table-cells"></i>
-              <Link to={""}>Categorys</Link>
+              <Link to={"category"}>
+                <section>
+                  <i className="fa-solid fa-table-cells"></i>
+                  <p>Categorys</p>
+                </section>
+              </Link>
             </li>
             <li>
-              <i className="fa-brands fa-discourse"></i>
-              <Link to={""}>Courses</Link>
+              <Link to={"blog"}>
+                <section>
+                  <i className="fa-brands fa-discourse"></i>
+                  <p>Blog</p>
+                </section>
+              </Link>
             </li>
             <li>
-              <i className="fa-brands fa-blogger-b"></i>
-              <Link to={""}>Blogs</Link>
+              <Link to={"course"}>
+                <section>
+                  <i className="fa-brands fa-blogger-b"></i>
+                  <p>Cousres</p>
+                </section>
+              </Link>
             </li>
             <li>
-              <i className="fa-solid fa-user"></i>
-              <Link to={""}>User</Link>
+              <Link to={""}>
+                <section>
+                  <i className="fa-solid fa-user"></i>
+                  <p>User</p>
+                </section>
+              </Link>
             </li>
           </ul>
         </nav>

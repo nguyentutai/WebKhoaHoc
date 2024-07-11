@@ -1012,3 +1012,38 @@ footer a {
   width: auto;
   text-decoration: none;
 }
+.detail-blog {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+.acount-detail-blog {
+  width: 18%;
+  position: fixed;
+}
+.content-detail-blog {
+  margin-left: 20%;
+}
+/* .name-acount-detail-blog {
+  
+} */
+.blog-like i {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.blog-like {
+  width: 30px;
+  border-radius: 10px;
+  margin-top: 7px;
+}
+.blog-childen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.blog-chidren-like span {
+  font-size: 25px;
+}
