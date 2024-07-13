@@ -479,7 +479,7 @@
 .course-parent {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  gap: 70px;
   flex-wrap: wrap;
 }
 
@@ -500,6 +500,8 @@
 
 .course-watch {
   background-color: #ffffff;
+  border: none;
+  font-weight: 600;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   top: 80%;
@@ -519,7 +521,29 @@
   cursor: pointer;
   text-decoration: none;
 }
-
+.course-watch-buy {
+  background-color: #ff6f00;
+  border: none;
+  font-weight: 600;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-80%);
+  position: absolute;
+  width: 150px;
+  max-width: 150%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
 .course-image:hover .course-watch {
   opacity: 1;
   transform: translateX(-50%) translateY(-200%);
@@ -967,6 +991,8 @@ footer a {
 }
 .doc-blog {
   display: flex;
+  position: relative;
+  justify-content: space-between;
   gap: 20px;
   margin: 30px 0;
   padding: 40px 30px;
@@ -1046,4 +1072,61 @@ footer a {
 
 .blog-chidren-like span {
   font-size: 25px;
+}
+.blog-account {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+}
+.blog-acount-like {
+  display: flex;
+  align-items: center;
+}
+
+.blog-acount-like i {
+  font-size: 25px;
+  color: #bbbbbb9e;
+}
+.blog-account p {
+  margin-top: 14px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.blog-acount-write {
+  margin-left: 50px;
+}
+.blog-acount-write h4 {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.header-course-list {
+  position: absolute;
+  min-width: 300px;
+  top: 100%;
+  right: 4%;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 10px;
+  padding: 15px 30px;
+}
+.course-me {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.course-me-image {
+  max-width: 120px;
+}
+
+.course-me-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+.course-me-title p {
+  font-weight: 600;
 }

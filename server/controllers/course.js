@@ -92,16 +92,41 @@ class Course {
   // Xóa cứng Course trong MongoDB
   async removeCourseById(req, res) {
     try {
+      // Tìm khóa học theo ID
       const data = await courseSchema.findByIdAndDelete(req.params.id);
-      if (data) {
-        res.send({
-          status: true,
-          message: "Remove Course Successfully",
-          data: data,
+
+      if (!data) {
+        return res.status(404).send({
+          status: false,
+          message: "Course not found",
         });
       }
+
+      // Xóa courseId khỏi category trước khi xóa khóa học
+      const cate = await categorySchema.updateOne(
+        { _id: data.categoryId }, // Sử dụng categoryId của khóa học
+        { $pull: { coursesId: data._id } },
+        { new: true }
+      );
+
+      if (cate.nModified === 0) {
+        return res.status(400).send({
+          status: false,
+          message: "Failed to update category",
+        });
+      }
+
+      res.send({
+        status: true,
+        message: "Remove Course Successfully",
+        data: data,
+      });
     } catch (error) {
-      console.log("deleteCourse False" + error);
+      console.log("deleteCourse False: " + error);
+      res.status(500).send({
+        status: false,
+        message: "An error occurred while removing the course",
+      });
     }
   }
 

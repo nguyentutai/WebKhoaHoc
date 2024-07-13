@@ -1,16 +1,32 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../contexts/LoginProvider";
+import { OrderContext } from "../../contexts/OrderProvider";
 
 const HeaderPage = () => {
   const [login, setLogin] = useState(false);
+  const [course, setCourse] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
+  const popupRefCourse = useRef<HTMLDivElement>(null);
+  const [listCourse, setListCourse] = useState([] as any[]);
   const { username, dispathLogin } = useContext(LoginContext);
+  const { orders } = useContext(OrderContext);
+
+  useEffect(() => {
+    (async () => {
+      const resuilt = await fetch(
+        "http://localhost:3000/api/user/" +
+          JSON.parse(sessionStorage.getItem("user") as string)?._id
+      );
+      const data = await resuilt.json();
+      setCourse((prevLogin) => !prevLogin);
+      setListCourse(data.data.orderId);
+    })();
+  }, [orders]);
 
   const toggleLogin = () => {
     setLogin((prevLogin) => !prevLogin);
   };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -26,12 +42,30 @@ const HeaderPage = () => {
     };
   }, []);
 
+  const toggleCourse = () => {
+    setCourse((prevLogin) => !prevLogin);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRefCourse.current &&
+        !popupRefCourse.current.contains(event.target as Node)
+      ) {
+        setCourse(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const logout = () => {
     dispathLogin({
       type: "logout",
     });
   };
-
   return (
     <div className="header container">
       <div className="header-logo-title">
@@ -58,7 +92,7 @@ const HeaderPage = () => {
       </div>
       {username ? (
         <div className="header-account">
-          <div className="course-myaccount">
+          <div className="course-myaccount" onClick={toggleCourse}>
             <h3>Khóa học của tôi</h3>
           </div>
           <div className="accout" onClick={toggleLogin}>
@@ -74,7 +108,7 @@ const HeaderPage = () => {
                 </div>
                 <div className="information-account">
                   <div className="information-acount-title">
-                    <h4>{username}</h4>
+                    <h4>{username.username}</h4>
                     <p>@nguyentai31</p>
                   </div>
                 </div>
@@ -82,7 +116,7 @@ const HeaderPage = () => {
               <div className="personal-page">
                 <Link to={""}>Trang cá nhân</Link>
               </div>
-              <div className="write-blog">
+              <div className="write-blogs">
                 <Link to={""}>Viết blog</Link>
                 <Link to={""}>Bài viết của tôi</Link>
               </div>
@@ -109,6 +143,29 @@ const HeaderPage = () => {
             <Link to={"/register"}>Đăng kí</Link>
           </div>
         </div>
+      )}
+      {course && (
+        <section ref={popupRefCourse} className="header-course-list">
+          <div>
+            {listCourse && listCourse.length > 0 ? (
+              listCourse?.map((course) => (
+                <div className="course-me" key={course._id}>
+                  <div className="course-me-image">
+                    <img
+                      src={course.courseId[0]?.image}
+                      alt={course.courseId[0]?.slug}
+                    />
+                  </div>
+                  <div className="course-me-title">
+                    <p>{course.courseId[0]?.title}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>Bạn không có khóa học nào</div>
+            )}
+          </div>
+        </section>
       )}
     </div>
   );

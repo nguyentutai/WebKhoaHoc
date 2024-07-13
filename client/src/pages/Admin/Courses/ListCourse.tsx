@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 export default function ListCourse() {
   const { courses, dispatchCourses } = useContext(CourseContext);
-  const [fillterPro, setFilterPro] = useState<ICousrse[]>([]);
+  const [fillterCourse, setFilterCourse] = useState<ICousrse[]>([]);
   const [value, setValue] = useState("");
   const [arrange, setArrange] = useState("");
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function ListCourse() {
         type: "SET_COURSE",
         payload: data.data,
       });
-      setFilterPro(data.data);
+      setFilterCourse(data.data);
     })();
   }, []);
 
@@ -41,25 +41,25 @@ export default function ListCourse() {
   };
 
   useEffect(() => {
-    let filterProduct = [...courses];
+    let fillterCourse = [...courses];
     if (value) {
-      filterProduct = filterProduct.filter((pro: ICousrse) =>
+      fillterCourse = fillterCourse.filter((pro: ICousrse) =>
         pro.title.toLowerCase().includes(value.toLowerCase())
       );
     }
 
     if (arrange === "ascending") {
-      filterProduct.sort(
+      fillterCourse.sort(
         (a: ICousrse, b: ICousrse) => a.cornerprice - b.cornerprice
       );
     }
     if (arrange === "descending") {
-      filterProduct.sort(
+      fillterCourse.sort(
         (a: ICousrse, b: ICousrse) => b.cornerprice - a.cornerprice
       );
     }
 
-    setFilterPro(filterProduct);
+    setFilterCourse(fillterCourse);
   }, [value, arrange, courses]);
   return (
     <>
@@ -103,8 +103,8 @@ export default function ListCourse() {
             </tr>
           </thead>
           <tbody>
-            {fillterPro.length > 0 ? (
-              fillterPro?.map((course, index) => (
+            {fillterCourse.length > 0 ? (
+              fillterCourse?.map((course, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{course.title}</td>
@@ -129,7 +129,7 @@ export default function ListCourse() {
               ))
             ) : (
               <tr>
-                <td>Không có sản phẩm bạn cần tìm</td>
+                <td>Không có khóa học bạn cần tìm</td>
               </tr>
             )}
           </tbody>

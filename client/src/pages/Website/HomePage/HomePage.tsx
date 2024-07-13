@@ -1,4 +1,5 @@
 import Banner from "../../../components/Homes/Banner";
+import CourseFree from "../../../components/Homes/CourseFree";
 import CoursePro from "../../../components/Homes/CoursePro";
 
 const HomePage = () => {
@@ -10,6 +11,7 @@ const HomePage = () => {
       </section>
       <section className="">
         <CoursePro />
+        <CourseFree />
       </section>
     </div>
   );

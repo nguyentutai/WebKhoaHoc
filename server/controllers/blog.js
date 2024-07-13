@@ -1,19 +1,11 @@
 import blogSchema from "../model/blogSchema.js";
+import UserModel from "../model/userSchema.js";
 
 class Blog {
   // Lấy dữ liệu từ MongoDB
   async getBlog(req, res) {
     try {
-      const data = await blogSchema.find();
-      res.send(data);
-    } catch (error) {
-      console.log("getProducrs False" + error);
-    }
-  }
-  // Lấy dữ liệu theo id
-  async getBlogId(req, res) {
-    try {
-      const data = await blogSchema.findById(req.params.id);
+      const data = await blogSchema.find({}).populate("authorId");
       if (data) {
         res.send({
           status: true,
@@ -22,7 +14,24 @@ class Blog {
         });
       }
     } catch (error) {
-      console.log("GetBlog False" + error);
+      console.log("getProducrs False" + error);
+    }
+  }
+  // Lấy dữ liệu theo id
+  async getBlogId(req, res) {
+    try {
+      const data = await blogSchema
+        .findById(req.params.id)
+        .populate("authorId");
+      if (data) {
+        res.send({
+          status: true,
+          message: "GetBlogId Successfully",
+          data: data,
+        });
+      }
+    } catch (error) {
+      console.log("GetBlogId False" + error);
     }
   }
   async getBlogSlug(req, res) {
@@ -43,6 +52,16 @@ class Blog {
   async postBlog(req, res) {
     try {
       const data = await blogSchema.create(req.body);
+      const updateUser = await UserModel.findByIdAndUpdate(
+        data.blogId,
+        {
+          $push: { blogId: data._id },
+        },
+        { new: true }
+      );
+      if (!data || !updateUser) {
+        return res.status(400).json({ message: "Add Course False" });
+      }
       res.send({
         status: true,
         message: "Add Blog Successfully",
@@ -103,7 +122,7 @@ class Blog {
   // Xóa cứng Blog trong MongoDB
   async removeBlogById(req, res) {
     try {
-      const data = await blogSchema.findByIdAndRemove(req.params.id);
+      const data = await blogSchema.findByIdAndDelete(req.params.id);
       if (data) {
         res.send({
           status: true,

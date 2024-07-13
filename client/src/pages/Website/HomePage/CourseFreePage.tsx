@@ -8,7 +8,7 @@ interface getCourse {
   listCourse: ICousrse[];
 }
 
-const CourseProPage = (props: getCourse) => {
+const CourseFreePage = (props: getCourse) => {
   const { orders, dispatchOrder } = useContext(OrderContext);
   const nav = useNavigate();
   useEffect(() => {
@@ -70,7 +70,7 @@ const CourseProPage = (props: getCourse) => {
   return (
     <div className="course container4">
       <h2 className="cousre-pro">
-        <span className="pro">Khóa học Pro</span>
+        <span className="pro">Khóa học Free</span>
         <span className="course-new">Mới</span>
       </h2>
       <div className="course-parent">
@@ -120,4 +120,4 @@ const CourseProPage = (props: getCourse) => {
   );
 };
 
-export default CourseProPage;
+export default CourseFreePage;

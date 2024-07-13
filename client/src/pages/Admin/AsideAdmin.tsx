@@ -29,7 +29,7 @@ export default function AsideAdmin() {
               <Link to={"blog"}>
                 <section>
                   <i className="fa-brands fa-discourse"></i>
-                  <p>Blog</p>
+                  <p>Blogs</p>
                 </section>
               </Link>
             </li>
@@ -38,6 +38,14 @@ export default function AsideAdmin() {
                 <section>
                   <i className="fa-brands fa-blogger-b"></i>
                   <p>Cousres</p>
+                </section>
+              </Link>
+            </li>
+            <li>
+              <Link to={"order"}>
+                <section>
+                  <i className="fa-solid fa-cart-flatbed"></i>
+                  <p>Orders</p>
                 </section>
               </Link>
             </li>

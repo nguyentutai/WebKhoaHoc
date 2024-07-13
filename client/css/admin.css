@@ -408,9 +408,7 @@
 .form-course-image-option {
   width: 50%;
 }
-#thumbnail-file {
-  display: none;
-}
+
 .upload-image-course {
   background-color: rgba(174, 174, 174, 0.784);
   cursor: pointer;
@@ -463,4 +461,213 @@
 }
 .form-course img {
   border-radius: 10px;
+}
+
+/* Blog */
+.list-blog {
+  width: 100%;
+  padding: 10px 30px;
+}
+.list-blog h2 {
+  background-color: rgb(255, 123, 0);
+  width: fit-content;
+  padding: 7px 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: 22px;
+}
+.list-blog table {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+.list-blog .list-cate-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-blog .list-cate-title a {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(37, 81, 255, 0.799);
+  padding: 7px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-blog .list-cate-title a:hover {
+  background-color: rgb(37, 81, 255);
+  transition: 0.4s ease-in-out;
+}
+.list-blog table thead {
+  background-color: rgba(227, 227, 227, 0.821);
+}
+.list-blog table thead tr th {
+  padding: 7px 20px;
+  font-size: 19px;
+  font-weight: 700;
+}
+.list-blog table thead tr th:last-child {
+  padding-left: 85px;
+}
+.list-blog table tbody tr td {
+  padding: 10px 20px;
+}
+
+.list-blog table tbody tr a {
+  background-color: rgba(55, 68, 247, 0.801);
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-blog table tbody tr button {
+  background-color: rgba(255, 1, 1, 0.685);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-blog table tbody tr a:hover {
+  background-color: rgb(55, 68, 247);
+  transition: 0.4s ease-in-out;
+}
+.list-blog table tbody tr button:hover {
+  background-color: rgb(255, 1, 1);
+  transition: 0.4s ease-in-out;
+}
+.list-blog table tbody tr td:nth-child(4) .h {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-blog table tbody tr td:nth-child(4) .a {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: rgb(255, 0, 0);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-blog table tbody tr td:nth-child(4) {
+  padding-left: 46px;
+  font-weight: 700;
+}
+.list-blog table tbody tr td:nth-child(6) {
+  padding-left: 70px;
+}
+
+/* Order */
+
+.list-order {
+  width: 100%;
+  padding: 10px 30px;
+}
+.list-order h2 {
+  background-color: rgb(255, 123, 0);
+  width: fit-content;
+  padding: 7px 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: 22px;
+}
+.list-order table {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+.list-order .list-cate-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-order .list-cate-title a {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(37, 81, 255, 0.799);
+  padding: 7px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-order .list-cate-title a:hover {
+  background-color: rgb(37, 81, 255);
+  transition: 0.4s ease-in-out;
+}
+.list-order table thead {
+  background-color: rgba(227, 227, 227, 0.821);
+}
+.list-order table thead tr th {
+  padding: 7px 20px;
+  font-size: 19px;
+  font-weight: 700;
+}
+.list-order table thead tr th:last-child {
+  padding-left: 85px;
+}
+.list-order table tbody tr td {
+  padding: 10px 20px;
+}
+
+.list-order table tbody tr a {
+  background-color: rgba(55, 68, 247, 0.801);
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-order table tbody tr button {
+  background-color: rgba(255, 1, 1, 0.685);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.list-order table tbody tr a:hover {
+  background-color: rgb(55, 68, 247);
+  transition: 0.4s ease-in-out;
+}
+.list-order table tbody tr button:hover {
+  background-color: rgb(255, 1, 1);
+  transition: 0.4s ease-in-out;
+}
+.list-order table tbody tr td:nth-child(4) .h {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-order table tbody tr td:nth-child(4) .a {
+  font-weight: 600;
+  font-size: 14px;
+  background-color: rgb(255, 0, 0);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  width: 80px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.list-order table tbody tr td:nth-child(4) {
+  padding-left: 46px;
+  font-weight: 700;
+}
+.list-order table tbody tr td:nth-child(6) {
+  max-width: 100px;
+}
+.list-order table tbody tr td:nth-child(6) img {
+  width: 100%;
+  border-radius: 20px;
 }

@@ -19,37 +19,64 @@ import { CoursesProvider } from "./contexts/CourseProvider";
 import ListCourse from "./pages/Admin/Courses/ListCourse";
 import FormCourse from "./pages/Admin/Courses/FormCourse";
 import DetailBlog from "./pages/Website/Blog/DetailBlog";
+import PrivateRouterAdmin from "./components/Auth/PrivateRouterAdmin";
+import PrivateRouterUser from "./components/Auth/PrivateRouteUser";
+import { BlogProvider } from "./contexts/BlogProvider";
+import ListBlog from "./pages/Admin/Blog/ListBlog";
+import { OrderProvider } from "./contexts/OrderProvider";
+import ListOrder from "./pages/Admin/Order/ListOrder";
+import PrivateRouterLogin from "./components/Auth/PrivateRouterLogin";
 function App() {
   return (
     <LoginProvider>
-      <CategoryProvider>
-        <CoursesProvider>
-          <Routes>
-            <Route path="/" element={<LayoutWebsite />}>
-              <Route index element={<HomePage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:slug" element={<DetailBlog />} />
-              <Route path="/router" element={<RouterPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/write-blog" element={<BlogWrite />} />
-            </Route>
-            <Route path="/admin" element={<LayoutAdmin />}>
-              <Route index element={<Dashboard />} />
-              {/* Category */}
-              <Route path="category" element={<ListCategory />} />
-              <Route path="category/form-category" element={<FormCategory />} />
-              <Route
-                path="category/:id/form-category"
-                element={<FormCategory />}
-              />
-              <Route path="course" element={<ListCourse />} />
-              <Route path="course/form-course" element={<FormCourse />} />
-              <Route path="course/:id/form-course" element={<FormCourse />} />
-            </Route>
-          </Routes>
-        </CoursesProvider>
-      </CategoryProvider>
+      <OrderProvider>
+        <CategoryProvider>
+          <CoursesProvider>
+            <BlogProvider>
+              <Routes>
+                <Route path="/" element={<LayoutWebsite />}>
+                  <Route index element={<HomePage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<DetailBlog />} />
+                  <Route path="/router" element={<RouterPage />} />
+                  <Route path="/login" element={<PrivateRouterLogin />}>
+                    <Route path="/login" element={<LoginPage />} />
+                  </Route>
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/write-blog" element={<PrivateRouterUser />}>
+                    <Route path="/write-blog" element={<BlogWrite />} />
+                  </Route>
+                </Route>
+                <Route path="/admin" element={<PrivateRouterAdmin />}>
+                  <Route path="/admin" element={<LayoutAdmin />}>
+                    <Route index element={<Dashboard />} />
+                    {/* Category */}
+                    <Route path="category" element={<ListCategory />} />
+                    <Route
+                      path="category/form-category"
+                      element={<FormCategory />}
+                    />
+                    <Route
+                      path="category/:id/form-category"
+                      element={<FormCategory />}
+                    />
+                    {/* Course */}
+                    <Route path="course" element={<ListCourse />} />
+                    <Route path="course/form-course" element={<FormCourse />} />
+                    <Route
+                      path="course/:id/form-course"
+                      element={<FormCourse />}
+                    />
+                    {/* Blog */}
+                    <Route path="blog" element={<ListBlog />} />
+                    <Route path="order" element={<ListOrder />} />
+                  </Route>
+                </Route>
+              </Routes>
+            </BlogProvider>
+          </CoursesProvider>
+        </CategoryProvider>
+      </OrderProvider>
     </LoginProvider>
   );
 }

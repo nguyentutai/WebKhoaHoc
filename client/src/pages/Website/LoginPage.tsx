@@ -23,8 +23,9 @@ const LoginPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.ok) {
+          console.log(data);
           localStorage.setItem("token", data.token);
-          sessionStorage.setItem("user", data.user);
+          sessionStorage.setItem("user", JSON.stringify(data.user));
           dispathLogin({
             type: "login",
           });

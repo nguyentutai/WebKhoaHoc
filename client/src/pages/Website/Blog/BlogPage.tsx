@@ -9,10 +9,9 @@ const BlogPage = () => {
     fetch("http://localhost:3000/api/blog")
       .then((response) => response.json())
       .then((data) => {
-        setBlog(data);
+        setBlog(data.data);
       });
   }, []);
-
   return (
     <div className="container3 router-learn">
       <h3>Bài Viết Nổi Bật</h3>
@@ -23,11 +22,20 @@ const BlogPage = () => {
       <div className="blog-content">
         <div>
           {blog &&
-            blog.map((item, index) => (
+            blog?.map((item, index) => (
               <div key={index}>
                 <div className="doc-blog">
-                  <div>
+                  <div className="">
                     <Link to={item.slug}>{item.title}</Link>
+                    <div className="blog-account">
+                      <div className="blog-acount-like">
+                        <i className="fa-solid fa-heart"></i>
+                        <p>{item.like}</p>
+                      </div>
+                      <div className="blog-acount-write">
+                        <h4>{item.authorId?.username}</h4>
+                      </div>
+                    </div>
                   </div>
                   <img className="blog-image" src={item.image_url} alt="" />
                 </div>

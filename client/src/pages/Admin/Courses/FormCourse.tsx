@@ -55,9 +55,16 @@ export default function FormCourse() {
     data = { ...data, slug: toSlug(data.title) };
     let updatedProduct = { ...data };
 
-    if (thumbnailOption === "upload" && data.image && data.image[0]) {
-      const thumbnailUrl = await UploadCoudiary(data.image[0]);
-      updatedProduct = { ...updatedProduct, image: thumbnailUrl };
+    switch (thumbnailOption) {
+      case "upload":
+        if (data.image && data.image[0]) {
+          console.log(data.image);
+          const thumbnailUrl = await UploadCoudiary(data.image[0]);
+          console.log(thumbnailUrl);
+          updatedProduct = { ...updatedProduct, image: thumbnailUrl };
+        }
+        break;
+      default:
     }
 
     try {
@@ -72,7 +79,9 @@ export default function FormCourse() {
         },
         body: JSON.stringify(updatedProduct),
       });
+
       const newdata = await result.json();
+
       if (newdata.data) {
         toast.success(
           id ? "Update Course Successfully" : "Add Course Successfully"
@@ -82,9 +91,12 @@ export default function FormCourse() {
           payload: newdata.data,
         });
         nav("/admin/course");
+      } else {
+        toast.error("Failed to add or update course");
       }
     } catch (error) {
       console.log(error);
+      toast.error("An error occurred while adding or updating the course");
     }
   };
 
@@ -227,17 +239,13 @@ export default function FormCourse() {
                 )}
                 {thumbnailOption === "upload" && (
                   <div>
-                    <label
-                      htmlFor="thumbnail-file"
-                      className="upload-image-course"
-                    >
+                    {/* <label htmlFor="thumbnail" className="upload-image-course">
                       <i className="fa-solid fa-file-arrow-up"></i>
                       <p>Image Course</p>
-                    </label>
+                    </label> */}
                     <input
                       type="file"
-                      className=""
-                      id="thumbnail-file"
+                      id="thumbnail"
                       {...register("image", { required: true })}
                       onChange={handleImageChange}
                     />

@@ -112,15 +112,17 @@ const BlogWrite = () => {
           updatedContent = updatedContent.replace(img.originalSrc, img.newSrc);
         }
       });
-      console.log(updatedContent);
-      setBlog({
-        title: title,
-        slug: toSlug(title),
-        like: 0,
-        content: updatedContent,
-        status: true,
-        image_url: imageUp,
-      });
+      if (JSON.stringify(sessionStorage.getItem("user"))) {
+        setBlog({
+          title: title,
+          slug: toSlug(title),
+          authorId: JSON.parse(sessionStorage.getItem("user") as string)._id,
+          like: 0,
+          content: updatedContent,
+          status: true,
+          image_url: imageUp,
+        });
+      }
     }
   };
   if (blog) {
