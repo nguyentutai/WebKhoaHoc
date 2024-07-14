@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ICousrse from "../../interfaces/ICousrse";
-import CourseProPage from "../../pages/Website/HomePage/CourseProPage";
 import CourseFreePage from "../../pages/Website/HomePage/CourseFreePage";
 
 const CourseFree = () => {

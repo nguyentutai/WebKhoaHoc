@@ -93,7 +93,55 @@
   margin: 0 5px;
   opacity: 0.7;
 }
-
+.header-search {
+  position: relative;
+}
+.header-list-search {
+  position: absolute;
+  max-height: 70vh;
+  left: -13px;
+  top: 120%;
+  border-radius: 20px;
+  width: 450px;
+  padding: 10px 20px;
+  background-color: white;
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.header-list-search::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.header-list-search::-webkit-scrollbar-thumb {
+  background-color: #ff7b00d9;
+  border-radius: 5px;
+}
+.header-list-search .title-search {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+}
+.title-search i {
+  font-size: 25px;
+  color: #a0a0a0;
+}
+.title-search p {
+  color: #a0a0a0;
+  font-size: 18px;
+}
+.list-course-search h4,
+.list-blog-search h4 {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: sans-serif;
+  padding: 10px 5px;
+  border-bottom: 0.5px solid rgba(201, 201, 201, 0.575);
+}
+.list-blog-search {
+  margin-top: 20px;
+}
 .header-search form {
   display: flex;
   align-items: center;
@@ -104,7 +152,27 @@
   padding: 0 16px 0 8px;
   width: 420px;
 }
-
+.course-header-search-image,
+.blog-header-search-image {
+  width: 50px;
+  height: 50px;
+}
+.course-header-search,
+.blog-header-search {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: black;
+  padding-left: 10px;
+  align-items: center;
+}
+.course-header-search img,
+.blog-header-search-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
 .header-search input {
   border: none;
   caret-color: #444;
@@ -113,7 +181,12 @@
   outline: none;
   padding: 0 4px;
 }
-
+.course-header-search-title p,
+.blog-header-search-title p {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 400;
+}
 .header-logo-title .header-title h3 {
   color: #000;
   font-size: 16px;
@@ -1129,4 +1202,7 @@ footer a {
 }
 .course-me-title p {
   font-weight: 600;
+}
+footer {
+  margin-top: 150px;
 }

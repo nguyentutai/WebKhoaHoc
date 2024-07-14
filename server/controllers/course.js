@@ -1,3 +1,4 @@
+import blogSchema from "../model/blogSchema.js";
 import categorySchema from "../model/categorySchema.js";
 import courseSchema from "../model/courseSchema.js";
 
@@ -102,9 +103,8 @@ class Course {
         });
       }
 
-      // Xóa courseId khỏi category trước khi xóa khóa học
       const cate = await categorySchema.updateOne(
-        { _id: data.categoryId }, // Sử dụng categoryId của khóa học
+        { _id: data.categoryId },
         { $pull: { coursesId: data._id } },
         { new: true }
       );
@@ -148,6 +148,28 @@ class Course {
       }
     } catch (error) {
       console.log("softRemoveCourseById Course Successfully");
+    }
+  }
+  async searchCourse(req, res) {
+    try {
+      const keyword = req.query.keyword || "";
+      const data = await courseSchema.find({
+        title: new RegExp(keyword, "i"),
+      });
+      const data1 = await blogSchema.find({
+        title: new RegExp(keyword, "i"),
+      });
+      return res.status(200).json({
+        message: "Search Course Successfully",
+        data: {
+          courses: data,
+          blogs: data1,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "searchCourse and Blog False",
+      });
     }
   }
 }

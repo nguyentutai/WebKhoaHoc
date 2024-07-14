@@ -104,14 +104,6 @@ const CourseFreePage = (props: getCourse) => {
               <div className="course-title">
                 <Link to={""}>{course.title}</Link>
               </div>
-              <div className="course-price">
-                <div className="course-discount">
-                  <p>{Number(course.discount).toLocaleString()}đ</p>
-                </div>
-                <div className="course-tree">
-                  <p>{Number(course.cornerprice).toLocaleString()}đ</p>
-                </div>
-              </div>
             </div>
           );
         })}

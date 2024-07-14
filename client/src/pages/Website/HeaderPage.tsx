@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../contexts/LoginProvider";
 import { OrderContext } from "../../contexts/OrderProvider";
+import ICousrse from "../../interfaces/ICousrse";
+import { IBlog } from "../../interfaces/IBlog";
 
 const HeaderPage = () => {
   const [login, setLogin] = useState(false);
@@ -11,7 +13,9 @@ const HeaderPage = () => {
   const [listCourse, setListCourse] = useState([] as any[]);
   const { username, dispathLogin } = useContext(LoginContext);
   const { orders } = useContext(OrderContext);
-
+  const [search, setSearch] = useState("");
+  const [searchCourse, setSearchCourse] = useState([] as ICousrse[]);
+  const [searchBlog, setSearchBlog] = useState([] as IBlog[]);
   useEffect(() => {
     (async () => {
       const resuilt = await fetch(
@@ -66,6 +70,21 @@ const HeaderPage = () => {
       type: "logout",
     });
   };
+
+  useEffect(() => {
+    (async () => {
+      const resuilt = await fetch(
+        `http://localhost:3000/api/search?keyword=${search}`
+      );
+      const data = await resuilt.json();
+      setSearchCourse(data.data.courses);
+      setSearchBlog(data.data.blogs);
+    })();
+  }, [search]);
+
+  console.log(searchBlog);
+  console.log(searchCourse);
+
   return (
     <div className="header container">
       <div className="header-logo-title">
@@ -86,9 +105,56 @@ const HeaderPage = () => {
           </div>
           <input
             type="search"
-            placeholder="Tìm kiếm khóa học, bài viết, video, ... "
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Tìm kiếm khóa học, bài viết, ... "
           />
         </form>
+        {search && (
+          <div className="header-list-search">
+            <div className="title-search">
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <p>Kết quả cho '{search}'</p>
+            </div>
+            <div className="list-course-search">
+              <h4>KHÓA HỌC</h4>
+              {searchCourse && searchCourse.length > 0 ? (
+                searchCourse.map((course) => (
+                  <Link to={``} className="course-header-search">
+                    <div className="course-header-search-image">
+                      <img src={course.image} alt={course.slug} />
+                    </div>
+                    <div className="course-header-search-title">
+                      <p>{course.title}</p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="course-search-false">
+                  <p>Không có khóa học bạn cần tìm</p>
+                </div>
+              )}
+            </div>
+            <div className="list-blog-search">
+              <h4>BÀI VIẾT</h4>
+              {searchBlog && searchBlog.length > 0 ? (
+                searchBlog.map((blog) => (
+                  <Link to={``} className="blog-header-search">
+                    <div className="blog-header-search-image">
+                      <img src={blog.image_url} alt={blog.slug} />
+                    </div>
+                    <div className="blog-header-search-title">
+                      <p>{blog.title}</p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="blog-search-false">
+                  <p>Không có bài viết bạn cần tìm</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
       {username ? (
         <div className="header-account">
