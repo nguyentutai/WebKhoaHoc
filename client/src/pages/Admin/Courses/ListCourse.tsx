@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CourseContext } from "../../../contexts/CourseProvider";
 import ICousrse from "../../../interfaces/ICousrse";
 import { toast } from "react-toastify";
+import instans from "../../../utils/Axios";
 
 export default function ListCourse() {
   const { courses, dispatchCourses } = useContext(CourseContext);
@@ -11,8 +12,9 @@ export default function ListCourse() {
   const [arrange, setArrange] = useState("");
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:3000/api/courses");
-      const data = await result.json();
+      // const result = await fetch("http://localhost:3000/api/courses");
+      const { data } = await instans.get(`/courses`);
+      // const data = await result.json();
       dispatchCourses({
         type: "SET_COURSE",
         payload: data.data,
@@ -23,11 +25,13 @@ export default function ListCourse() {
 
   const onDelete = async (_id: string) => {
     try {
-      const resuile = await fetch("http://localhost:3000/api/courses/" + _id, {
-        method: "DELETE",
-      });
-      const data = await resuile.json();
-      console.log(data.data);
+      const { data } = await instans.delete(`/courses/${_id}`);
+
+      // const resuile = await fetch("http://localhost:3000/api/courses/" + _id, {
+      //   method: "DELETE",
+      // });
+      // const data = await resuile.json();
+      // console.log(data.data);
       if (data.data) {
         toast.success("Courses deleted successfully");
         dispatchCourses({

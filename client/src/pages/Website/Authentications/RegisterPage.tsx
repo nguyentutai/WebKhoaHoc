@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import IRegister from "../../../interfaces/Auth/IRegister";
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const RegisterPage = () => {
   const {
@@ -13,7 +15,7 @@ const RegisterPage = () => {
   } = useForm<IRegister>();
   const navidate = useNavigate();
   const submit = (data: IRegister) => {
-    fetch("http://localhost:3000/auth/register", {
+    fetch(`http://localhost:3000/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

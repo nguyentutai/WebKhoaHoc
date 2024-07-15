@@ -9,6 +9,7 @@ const reducerLog = (state: any, action: any) => {
     case "login":
       return JSON.parse(sessionStorage.getItem("user") as string);
     case "logout":
+      // location.reload();
       return sessionStorage.removeItem("user");
     default:
       return state;

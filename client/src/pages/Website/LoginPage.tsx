@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../../contexts/LoginProvider";
 import { toast } from "react-toastify";
+
 const LoginPage = () => {
   const navidate = useNavigate();
   const {
@@ -11,33 +12,33 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>();
+
   const { dispathLogin } = useContext(LoginContext);
-  const submit = (data: ILogin) => {
-    fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.ok) {
-          console.log(data);
-          localStorage.setItem("token", data.token);
-          sessionStorage.setItem("user", JSON.stringify(data.user));
-          dispathLogin({
-            type: "login",
-          });
-          toast.success("Login successfully");
-          navidate("/");
-        } else {
-          toast.error(data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+
+  const submit = async (data: ILogin) => {
+    try {
+      const resuilt = await fetch(`http://localhost:3000/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
+      const datas = await resuilt.json();
+      if (datas.ok) {
+        localStorage.setItem("token", datas.token);
+        sessionStorage.setItem("user", JSON.stringify(datas.user));
+        dispathLogin({
+          type: "login",
+        });
+        toast.success("Login successfully");
+        navidate("/blog");
+      } else {
+        toast.error(datas.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div id="login">
@@ -51,9 +52,9 @@ const LoginPage = () => {
       <div className="content-left">
         <h2>Login</h2>
         <div className="social-icons">
-          <a href="#" className="icon">
+          <Link to={"http://localhost:3000/auth/google"} className="icon">
             <i className="fa-brands fa-google-plus-g"></i>
-          </a>
+          </Link>
           <a href="#" className="icon">
             <i className="fa-brands fa-facebook-f"></i>
           </a>

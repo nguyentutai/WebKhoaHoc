@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { IBlog } from "../../../interfaces/IBlog";
+// import { toast } from "react-toastify";
+// import { IBlog } from "../../../interfaces/IBlog";
 import { OrderContext } from "../../../contexts/OrderProvider";
+import instans from "../../../utils/Axios";
 
 export default function ListOrder() {
   const { orders, dispatchOrder } = useContext(OrderContext);
@@ -10,15 +11,16 @@ export default function ListOrder() {
   //   const [arrange, setArrange] = useState("");
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:3000/api/order");
-      const data = await result.json();
+      // const result = await fetch("http://localhost:3000/api/order");
+      const { data } = await instans.get(`/order`);
+
+      // const data = await result.json();
       dispatchOrder({
         type: "SET_ORDER",
         payload: data.data,
       });
     })();
   }, []);
-  console.log(orders);
   //   const onDelete = async (_id: string) => {
   //     try {
   //       const resuile = await fetch("http://localhost:3000/api/blog/" + _id, {

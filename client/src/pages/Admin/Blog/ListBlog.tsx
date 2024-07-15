@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { BlogContext } from "../../../contexts/BlogProvider";
 import { toast } from "react-toastify";
 import { IBlog } from "../../../interfaces/IBlog";
+import instans from "../../../utils/Axios";
 
 export default function ListBlog() {
   const { blogs, dispatchBlog } = useContext(BlogContext);
@@ -10,9 +11,7 @@ export default function ListBlog() {
   const [arrange, setArrange] = useState("");
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:3000/api/blog");
-      const data = await result.json();
-      console.log(data);
+      const { data } = await instans.get("/blog");
       dispatchBlog({
         type: "SET_BLOG",
         payload: data.data,
@@ -21,6 +20,7 @@ export default function ListBlog() {
   }, []);
   const onDelete = async (_id: string) => {
     try {
+      // const { data } = await instans.delete(`/blog/${_id}`);
       const resuile = await fetch("http://localhost:3000/api/blog/" + _id, {
         method: "DELETE",
       });
@@ -30,28 +30,28 @@ export default function ListBlog() {
         type: "DELETE_BLOG",
         payload: data.data,
       });
-      setFilterBlog(data.data);
+      setFilterBlog(data);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    let fillterBlog = [...blogs];
-    if (value) {
-      fillterBlog = fillterBlog.filter((pro: IBlog) =>
-        pro.title.toLowerCase().includes(value.toLowerCase())
-      );
-    }
+  // useEffect(() => {
+  //   let fillterBlog = [...blogs];
+  //   if (value) {
+  //     fillterBlog = fillterBlog.filter((pro: IBlog) =>
+  //       pro.title.toLowerCase().includes(value.toLowerCase())
+  //     );
+  //   }
 
-    if (arrange === "ascending") {
-      fillterBlog.sort((a: IBlog, b: IBlog) => a.like - b.like);
-    }
-    if (arrange === "descending") {
-      fillterBlog.sort((a: IBlog, b: IBlog) => b.like - a.like);
-    }
+  //   if (arrange === "ascending") {
+  //     fillterBlog.sort((a: IBlog, b: IBlog) => a.like - b.like);
+  //   }
+  //   if (arrange === "descending") {
+  //     fillterBlog.sort((a: IBlog, b: IBlog) => b.like - a.like);
+  //   }
 
-    setFilterBlog(fillterBlog);
-  }, [value, arrange, blogs]);
+  //   setFilterBlog(fillterBlog);
+  // }, [value, arrange, blogs]);
   return (
     <>
       <div className="list-blog">

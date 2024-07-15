@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react";
 import toSlug from "../../../utils/Slug";
 import { toast } from "react-toastify";
 import { CategoryContext } from "../../../contexts/CategoryProvider";
+import instans from "../../../utils/Axios";
 
 export default function FormCategory() {
   const { dispatchCategoty } = useContext(CategoryContext);
@@ -19,32 +20,33 @@ export default function FormCategory() {
   if (id) {
     useEffect(() => {
       (async () => {
-        const ressult = await fetch(`http://localhost:3000/api/category/` + id);
-        const data = await ressult.json();
+        // const ressult = await fetch(`http://localhost:3000/api/category/` + id);
+        const { data } = await instans.get(`/category/${id}`);
         reset(data.data);
       })();
     }, [id]);
   }
-  const onSubmit = async (data: ICategory) => {
-    data = { ...data, slug: toSlug(data.name) };
+  const onSubmit = async (datas: ICategory) => {
+    datas = { ...datas, slug: toSlug(datas.name) };
     if (id) {
       try {
-        const ressult = await fetch(
-          `http://localhost:3000/api/category/` + id,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        const newdata = await ressult.json();
-        if (newdata.data) {
+        const { data } = await instans.put(`/category/${id}`, datas);
+        // const ressult = await fetch(
+        //   `http://localhost:3000/api/category/` + id,
+        //   {
+        //     method: "PUT",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(data),
+        //   }
+        // );
+        // const newdata = await ressult.json();
+        if (data.data) {
           toast.success("Update Category Successfully");
           dispatchCategoty({
             type: "UPDATE_CATEGORY",
-            payload: newdata.data,
+            payload: data.data,
           });
           nav("/admin/category");
         }
@@ -53,19 +55,20 @@ export default function FormCategory() {
       }
     } else {
       try {
-        const ressult = await fetch(`http://localhost:3000/api/category`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        const newdata = await ressult.json();
-        if (newdata.data) {
+        const { data } = await instans.post(`/category`, datas);
+        // const ressult = await fetch(`http://localhost:3000/api/category`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(data),
+        // });
+        // const newdata = await ressult.json();
+        if (data) {
           toast.success("Add Category Successfully");
           dispatchCategoty({
             type: "ADD_CATEGORY",
-            payload: newdata.data,
+            payload: data.data,
           });
           nav("/admin/category");
         }

@@ -3,6 +3,7 @@ import ICousrse from "../../../interfaces/ICousrse";
 import { toast } from "react-toastify";
 import { useContext, useEffect } from "react";
 import { OrderContext } from "../../../contexts/OrderProvider";
+import instans from "../../../utils/Axios";
 
 interface getCourse {
   listCourse: ICousrse[];
@@ -12,48 +13,39 @@ const CourseProPage = (props: getCourse) => {
   const { orders, dispatchOrder } = useContext(OrderContext);
   const nav = useNavigate();
   useEffect(() => {
-    try {
-      (async () => {
-        const result = await fetch("http://localhost:3000/api/order");
-        const data = await result.json();
+    (async () => {
+      try {
+        const { data } = await instans.get("/order");
         if (data.data) {
           dispatchOrder({
             type: "SET_ORDER",
             payload: data.data,
           });
         }
-      })();
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   const byeCorse = async (course: ICousrse) => {
     if (JSON.parse(sessionStorage.getItem("user") as string)) {
       try {
-        const result = await fetch("http://localhost:3000/api/order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: JSON.parse(sessionStorage.getItem("user") as string)._id,
-            courseId: course._id,
-            totalPrice: course.cornerprice,
-          }),
+        const { data } = await instans.post(`/order`, {
+          userId: JSON.parse(sessionStorage.getItem("user") as string)?._id,
+          courseId: course._id,
+          totalPrice: course.cornerprice,
         });
-        const data = await result.json();
         dispatchOrder({
           type: "ADD_ORDER",
           payload: data.data,
         });
         if (data.data) {
-          const updatedResult = await fetch("http://localhost:3000/api/order");
-          const updatedData = await updatedResult.json();
-          if (updatedData.data) {
+          const { data } = await instans.get("/order");
+          if (data) {
             dispatchOrder({
               type: "SET_ORDER",
-              payload: updatedData.data,
+              payload: data.data,
             });
             toast.success("Successfully registered for the course");
           }

@@ -7,6 +7,7 @@ import { CourseContext } from "../../../contexts/CourseProvider";
 import ICousrse from "../../../interfaces/ICousrse";
 import { ICategory } from "../../../interfaces/ICategory";
 import UploadCoudiary from "../../../utils/Cloudiary";
+import instans from "../../../utils/Axios";
 
 export default function FormCourse() {
   const { dispatchCourses } = useContext(CourseContext);
@@ -28,10 +29,11 @@ export default function FormCourse() {
 
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:3000/api/category");
-      const data = await result.json();
-      if (data.data) {
-        setCategory(data.data);
+      // const result = await fetch("http://localhost:3000/api/category");
+      const { data } = await instans.get(`/category`);
+      // const data = await result.json();
+      if (data) {
+        setCategory(data);
       }
     })();
   }, []);
@@ -39,8 +41,9 @@ export default function FormCourse() {
   useEffect(() => {
     if (id) {
       (async () => {
-        const result = await fetch(`http://localhost:3000/api/courses/` + id);
-        const data = await result.json();
+        // const result = await fetch(`http://localhost:3000/api/courses/` + id);
+        const { data } = await instans.get(`/category/${id}`);
+        // const data = await result.json();
         if (data.data) {
           reset(data.data);
           setThumbnailUrl(data.data.image);

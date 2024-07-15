@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IBlog } from "../../../interfaces/IBlog";
+import instans from "../../../utils/Axios";
+import { toast } from "react-toastify";
 
 export default function DetailBlog() {
   const { slug } = useParams();
@@ -12,12 +14,13 @@ export default function DetailBlog() {
     if (slug) {
       (async () => {
         try {
-          const response = await fetch(
-            `http://localhost:3000/api/blogslug/${slug}`
-          );
-          const data = await response.json();
+          const { data } = await instans.get(`/blogslug/${slug}`);
+          // const response = await fetch(
+          //   `http://localhost:3000/api/blogslug/${slug}`
+          // );
+          // const data = await response.json();
           setContentBlog(data.data);
-          setLike(data.data.like);
+          setLike(data?.data.like);
         } catch (error) {
           console.log(error);
         }
@@ -28,21 +31,24 @@ export default function DetailBlog() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/blogLike/${contentBlog._id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ like }),
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
+        const { data } = await instans.put(`/blogLike/${contentBlog._id}`, {
+          like: like,
+        });
+
+        // const response = await fetch(
+        //   `http://localhost:3000/api/blogLike/${contentBlog._id}`,
+        //   {
+        //     method: "PUT",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ like }),
+        //   }
+        // );
+        // const data = await response.json();
+        if (data) {
           setLike(data.data.like);
-        } else {
-          console.error("Failed to update like.");
+          toast.success("Like successfully");
         }
       } catch (error) {
         console.error("Error updating like:", error);

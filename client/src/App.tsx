@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import "../css/main.css";
 import "../css/auth.css";
 import "../css/admin.css";
-import { LoginProvider } from "./contexts/LoginProvider";
 import BlogWrite from "./components/Pages/BlogWrite";
 import LayoutWebsite from "./layouts/LayoutWebsite";
 import LayoutAdmin from "./layouts/LayoutAdmin";
@@ -14,18 +13,21 @@ import HomePage from "./pages/Website/HomePage/HomePage";
 import Dashboard from "./pages/Admin/Dashboards/Dashboard";
 import ListCategory from "./pages/Admin/Category/ListCategory";
 import FormCategory from "./pages/Admin/Category/FormCategory";
-import { CategoryProvider } from "./contexts/CategoryProvider";
-import { CoursesProvider } from "./contexts/CourseProvider";
 import ListCourse from "./pages/Admin/Courses/ListCourse";
 import FormCourse from "./pages/Admin/Courses/FormCourse";
 import DetailBlog from "./pages/Website/Blog/DetailBlog";
 import PrivateRouterAdmin from "./components/Auth/PrivateRouterAdmin";
 import PrivateRouterUser from "./components/Auth/PrivateRouteUser";
-import { BlogProvider } from "./contexts/BlogProvider";
 import ListBlog from "./pages/Admin/Blog/ListBlog";
-import { OrderProvider } from "./contexts/OrderProvider";
 import ListOrder from "./pages/Admin/Order/ListOrder";
 import PrivateRouterLogin from "./components/Auth/PrivateRouterLogin";
+import LoginSusscess from "./pages/Website/LoginSuscess";
+import { LoginProvider } from "./contexts/LoginProvider";
+import { OrderProvider } from "./contexts/OrderProvider";
+import { CategoryProvider } from "./contexts/CategoryProvider";
+import { CoursesProvider } from "./contexts/CourseProvider";
+import { BlogProvider } from "./contexts/BlogProvider";
+
 function App() {
   return (
     <LoginProvider>
@@ -42,11 +44,16 @@ function App() {
                   <Route path="/login" element={<PrivateRouterLogin />}>
                     <Route path="/login" element={<LoginPage />} />
                   </Route>
+
                   <Route path="/register" element={<RegisterPage />} />
                   <Route path="/write-blog" element={<PrivateRouterUser />}>
                     <Route path="/write-blog" element={<BlogWrite />} />
                   </Route>
                 </Route>
+                <Route
+                  path="/login-success/:userId"
+                  element={<LoginSusscess />}
+                />
                 <Route path="/admin" element={<PrivateRouterAdmin />}>
                   <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<Dashboard />} />

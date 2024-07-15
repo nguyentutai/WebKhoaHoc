@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import UploadCoudiary from "../../utils/Cloudiary";
 import { toast } from "react-toastify";
 import toSlug from "../../utils/Slug";
+import instans from "../../utils/Axios";
 const BlogWrite = () => {
   const [content, setContent] = useState("");
   const [watctchContent, setwatchContent] = useState("");
@@ -127,6 +128,13 @@ const BlogWrite = () => {
   };
   if (blog) {
     useEffect(() => {
+      // (async () => {
+      //   const { data } = await instans.post("/blog", blog);
+      //   if (data) {
+      //     toast.success("Added blog successfully");
+      //     nav("/blog");
+      //   }
+      // })();
       fetch("http://localhost:3000/api/blog", {
         method: "POST",
         headers: {
@@ -138,7 +146,6 @@ const BlogWrite = () => {
         .then((data) => {
           if (data) {
             alert("Thêm bài viết thành công");
-            nav("/blog");
           }
         });
     }, [blog]);

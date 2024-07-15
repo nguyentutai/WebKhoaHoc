@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IBlog } from "../../../interfaces/IBlog";
+import instans from "../../../utils/Axios";
 
 const BlogPage = () => {
   const [blog, setBlog] = useState<IBlog[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/blog")
-      .then((response) => response.json())
-      .then((data) => {
+    (async () => {
+      const { data } = await instans.get("/blog");
+      if (data) {
         setBlog(data.data);
-      });
+      }
+    })();
   }, []);
   return (
     <div className="container3 router-learn">

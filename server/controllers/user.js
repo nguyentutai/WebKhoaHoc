@@ -17,7 +17,7 @@ class User {
         });
       }
     } catch (error) {
-      console.log("getUser False" + error);
+      console.log("getUser False " + error);
     }
   }
   async getUserId(req, res) {

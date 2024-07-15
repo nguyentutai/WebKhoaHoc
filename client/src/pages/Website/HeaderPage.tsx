@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../../contexts/LoginProvider";
 import { OrderContext } from "../../contexts/OrderProvider";
 import ICousrse from "../../interfaces/ICousrse";
 import { IBlog } from "../../interfaces/IBlog";
+import instans from "../../utils/Axios";
 
 const HeaderPage = () => {
   const [login, setLogin] = useState(false);
@@ -16,21 +17,24 @@ const HeaderPage = () => {
   const [search, setSearch] = useState("");
   const [searchCourse, setSearchCourse] = useState([] as ICousrse[]);
   const [searchBlog, setSearchBlog] = useState([] as IBlog[]);
+
+  const nav = useNavigate();
+
+  // if (sessionStorage.getItem("user") && orders) {
   useEffect(() => {
     (async () => {
-      const resuilt = await fetch(
-        "http://localhost:3000/api/user/" +
-          JSON.parse(sessionStorage.getItem("user") as string)?._id
+      const { data } = await instans.get(
+        `/user/${JSON.parse(sessionStorage.getItem("user") as string)?._id}`
       );
-      const data = await resuilt.json();
       setCourse((prevLogin) => !prevLogin);
       setListCourse(data.data.orderId);
     })();
   }, [orders]);
-
+  // }
   const toggleLogin = () => {
     setLogin((prevLogin) => !prevLogin);
   };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -66,24 +70,21 @@ const HeaderPage = () => {
   }, []);
 
   const logout = () => {
+    // sessionStorage.removeItem("user");
     dispathLogin({
       type: "logout",
     });
+    nav("/login");
   };
-
+  // if (search) {
   useEffect(() => {
     (async () => {
-      const resuilt = await fetch(
-        `http://localhost:3000/api/search?keyword=${search}`
-      );
-      const data = await resuilt.json();
+      const { data } = await instans.get(`/search?keyword=${search}`);
       setSearchCourse(data.data.courses);
       setSearchBlog(data.data.blogs);
     })();
   }, [search]);
-
-  console.log(searchBlog);
-  console.log(searchCourse);
+  // }
 
   return (
     <div className="header container">
@@ -119,7 +120,11 @@ const HeaderPage = () => {
               <h4>KHÓA HỌC</h4>
               {searchCourse && searchCourse.length > 0 ? (
                 searchCourse.map((course) => (
-                  <Link to={``} className="course-header-search">
+                  <Link
+                    to={``}
+                    key={course._id}
+                    className="course-header-search"
+                  >
                     <div className="course-header-search-image">
                       <img src={course.image} alt={course.slug} />
                     </div>
@@ -162,14 +167,14 @@ const HeaderPage = () => {
             <h3>Khóa học của tôi</h3>
           </div>
           <div className="accout" onClick={toggleLogin}>
-            <img src="../../public/image/account.jpg" alt="" />
+            <img src={username.image_url} alt="" />
           </div>
           {login && (
             <section className="popup-login active" ref={popupRef}>
               <div className="information">
                 <div className="information-image">
                   <Link to={``}>
-                    <img src="../../../public/image/account.jpg" alt="" />
+                    <img src={username.image_url} alt="" />
                   </Link>
                 </div>
                 <div className="information-account">

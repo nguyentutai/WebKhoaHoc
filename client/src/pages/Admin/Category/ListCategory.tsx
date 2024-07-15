@@ -3,6 +3,7 @@ import { CategoryContext } from "../../../contexts/CategoryProvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ICategory } from "../../../interfaces/ICategory";
+import instans from "../../../utils/Axios";
 
 export default function ListCategory() {
   const { categorys, dispatchCategoty } = useContext(CategoryContext);
@@ -10,8 +11,8 @@ export default function ListCategory() {
   const [value, setValue] = useState("");
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:3000/api/category");
-      const data = await result.json();
+      // const result = await fetch("http://localhost:3000/api/category");
+      const { data } = await instans.get(`/category`);
       dispatchCategoty({
         type: "SET_CATEGORY",
         payload: data.data,
@@ -30,11 +31,12 @@ export default function ListCategory() {
   }, [value, categorys]);
   const onDelete = async (_id: string) => {
     try {
-      const resuile = await fetch("http://localhost:3000/api/category/" + _id, {
-        method: "DELETE",
-      });
-      const data = await resuile.json();
-      console.log(data.data);
+      const { data } = await instans.delete(`/category/${_id}`);
+      // const resuile = await fetch("http://localhost:3000/api/category/" + _id, {
+      //   method: "DELETE",
+      // });
+      // const data = await resuile.json();
+      // console.log(data.data);
       if (data.data) {
         toast.success("Category deleted successfully");
         dispatchCategoty({
